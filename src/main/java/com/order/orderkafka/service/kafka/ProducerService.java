@@ -19,7 +19,7 @@ import java.util.UUID;
 public class ProducerService {
 
 
-    private final KafkaTemplate<String, Orders> weatherKafkaTemplate;
+    private final KafkaTemplate<String, Orders> ordersKafkaTemplate;
     private final KafkaTemplate<String, String> orderTemplate;
     private final KafkaTemplate<String, Updates> updatesKafkaTemplate;
 
@@ -33,9 +33,9 @@ public class ProducerService {
     @Value("${kafka.topic.update.name}")
     private String UPDATE_TOPIC;
 
-    public ProducerService(KafkaTemplate<String, Orders> weatherKafkaTemplate, KafkaTemplate<String, String> orderTemplate, KafkaTemplate<String, Updates> updatesKafkaTemplate) {
+    public ProducerService(KafkaTemplate<String, Orders> ordersKafkaTemplate, KafkaTemplate<String, String> orderTemplate, KafkaTemplate<String, Updates> updatesKafkaTemplate) {
 
-        this.weatherKafkaTemplate = weatherKafkaTemplate;
+        this.ordersKafkaTemplate = ordersKafkaTemplate;
         this.orderTemplate=orderTemplate;
         this.updatesKafkaTemplate=updatesKafkaTemplate;
     }
@@ -64,7 +64,7 @@ public class ProducerService {
     public void sendMessageJson(Orders orders){
         log.info(String.format("$$$$ => Consumed Message: %s", orders));
 
-        weatherKafkaTemplate.executeInTransaction(t -> {
+        ordersKafkaTemplate.executeInTransaction(t -> {
             t.send(JSON_TOPIC, orders.getId(), orders);
 
             return true;

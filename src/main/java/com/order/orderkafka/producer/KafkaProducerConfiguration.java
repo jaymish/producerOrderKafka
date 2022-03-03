@@ -56,22 +56,14 @@ public class KafkaProducerConfiguration {
     @Bean
     public ProducerFactory<String, String> producerFactoryString() throws UnknownHostException{
         Map<String , Object> configProps = new HashMap<>();
-
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
-
         configProps.put(ProducerConfig.CLIENT_ID_CONFIG, clientId+"_"+ InetAddress.getLocalHost().getHostName()+"string");
-        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-
-        //Set acknowledgements for producer requests.
+        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer);
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, keySerializer);
         configProps.put(ProducerConfig.ACKS_CONFIG, acks);
-        //If the request fails, the producer can automatically retry,
         configProps.put(ProducerConfig.RETRIES_CONFIG, retries);
-        //Specify buffer size in config
         configProps.put(ProducerConfig.BATCH_SIZE_CONFIG, batchSize);
-        //Reduce the no of requests less than 0
         configProps.put(ProducerConfig.LINGER_MS_CONFIG, lingerMs);
-        //The buffer.memory controls the total amount of memory available to the producer for buffering.
         configProps.put(ProducerConfig.BUFFER_MEMORY_CONFIG, bufferMemory);
         configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, enableIdempoyence);
         configProps.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, transactionalId);
@@ -93,22 +85,14 @@ public class KafkaProducerConfiguration {
     @Bean
     public ProducerFactory<String, Orders> producerFactoryJson() throws UnknownHostException{
         Map<String , Object> configProps = new HashMap<>();
-
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
-
         configProps.put(ProducerConfig.CLIENT_ID_CONFIG, clientId+"_"+ InetAddress.getLocalHost().getHostName()+"string");
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, valueSerializer);
-
-        //Set acknowledgements for producer requests.
         configProps.put(ProducerConfig.ACKS_CONFIG, acks);
-        //If the request fails, the producer can automatically retry,
         configProps.put(ProducerConfig.RETRIES_CONFIG, retries);
-        //Specify buffer size in config
         configProps.put(ProducerConfig.BATCH_SIZE_CONFIG, batchSize);
-        //Reduce the no of requests less than 0
         configProps.put(ProducerConfig.LINGER_MS_CONFIG, lingerMs);
-        //The buffer.memory controls the total amount of memory available to the producer for buffering.
         configProps.put(ProducerConfig.BUFFER_MEMORY_CONFIG, bufferMemory);
         configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, enableIdempoyence);
         configProps.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, transactionalId);
@@ -132,22 +116,14 @@ public class KafkaProducerConfiguration {
     @Bean
     public ProducerFactory<String, Updates> producerFactoryUpdate() throws UnknownHostException{
         Map<String , Object> configProps = new HashMap<>();
-
         configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,bootstrapServers);
-
         configProps.put(ProducerConfig.CLIENT_ID_CONFIG, clientId+"_"+ InetAddress.getLocalHost().getHostName()+"string");
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer);
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, valueSerializer);
-
-        //Set acknowledgements for producer requests.
         configProps.put(ProducerConfig.ACKS_CONFIG, acks);
-        //If the request fails, the producer can automatically retry,
         configProps.put(ProducerConfig.RETRIES_CONFIG, retries);
-        //Specify buffer size in config
         configProps.put(ProducerConfig.BATCH_SIZE_CONFIG, batchSize);
-        //Reduce the no of requests less than 0
         configProps.put(ProducerConfig.LINGER_MS_CONFIG, lingerMs);
-        //The buffer.memory controls the total amount of memory available to the producer for buffering.
         configProps.put(ProducerConfig.BUFFER_MEMORY_CONFIG, bufferMemory);
         configProps.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, enableIdempoyence);
         configProps.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, transactionalId);

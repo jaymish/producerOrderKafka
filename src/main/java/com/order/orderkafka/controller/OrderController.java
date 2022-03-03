@@ -4,49 +4,34 @@ package com.order.orderkafka.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.order.orderkafka.model.Orders;
 import com.order.orderkafka.model.Updates;
-import com.order.orderkafka.service.OrderService;
 import com.order.orderkafka.service.kafka.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
-@RequestMapping(path = "/weather")
+@RequestMapping(path = "/Order")
 public class OrderController {
 
-    private OrderService orderService;
     private ProducerService producerService;
 
 
 
     @Autowired
-    public OrderController(OrderService orderService, ProducerService producerService){
-        this.orderService = orderService;
+    public OrderController(ProducerService producerService){
         this.producerService=producerService;
     }
 
 
-    @PostMapping("/addReading")
-    public boolean addWeatherReading(@RequestBody Orders orders) throws JsonProcessingException {
+    @PostMapping("/CreateOrder")
+    public boolean createOrder(@RequestBody Orders orders) throws JsonProcessingException {
         System.out.println(orders);
-        //weatherService.addWeatherReadings(weather);
         producerService.sendMessageJson(orders);
         return true;
     }
 
-    /*@PostMapping("/cancelorder")
-    public boolean cancelOrder(@RequestBody String id) throws JsonProcessingException {
-        System.out.println(id);
-        //weatherService.addWeatherReadings(weather);
-        producerService.sendMessage(id);
-        return true;
-    }*/
-
     @PostMapping("/updateorder")
     public boolean updateOrder(@RequestBody Updates updates) throws JsonProcessingException {
         System.out.println(updates);
-        //weatherService.addWeatherReadings(weather);
         producerService.sendMessageUpdate(updates);
         return true;
     }
